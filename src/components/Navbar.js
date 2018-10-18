@@ -11,13 +11,19 @@ import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { ListItem, Button } from '@material-ui/core';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 200;
+
+// console.log(theme!!!)
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        height: 440,
+        height: 64,
         zIndex: 1,
         overflow: 'hidden',
         position: 'relative',
@@ -26,8 +32,7 @@ const styles = theme => ({
     },
     appBar: {
         position: 'absolute',
-        zIndex: theme.zIndex.drawer + 10,
-
+        zIndex: theme.zIndex.drawer + 1,
     },
     navIconHide: {
         [theme.breakpoints.up('md')]: {
@@ -39,6 +44,8 @@ const styles = theme => ({
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth,
+        backgroundColor: '#651fff',
+        color: '#fff',
         [theme.breakpoints.up('md')]: {
             position: 'relative',
         },
@@ -52,12 +59,25 @@ const styles = theme => ({
         fontFamily: 'Roboto'
     },
     logout: {
-        marginLeft: 'auto'
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: 'auto'
+        }
     },
     drawer: {
-        backgroundColor: 'primary',
+        backgroundColor: 'secondary',
         color: 'inherit'
     },
+    tabs: {
+        marginLeft: 'auto',
+    },
+    tab: {
+        height: 64,
+        textAlign: 'center'
+    },
+    mobileTitle: {
+        marginTop: -40,
+        marginBottom: 20
+    }
 });
 
 class ResponsiveDrawer extends React.Component {
@@ -76,9 +96,12 @@ class ResponsiveDrawer extends React.Component {
             <div className={classes.drawer}>
                 <div className={classes.toolbar} />
                 <List className={classes.list}>
-                    <ListItem button>Home</ListItem>
+                    <Typography variant="h6" color="inherit" align="center" gutterBottom className={classes.mobileTitle}>Habit Creator</Typography>
+                    <ListItem button selected={this.props.navValue === 0} component={Link} to="/">Home</ListItem>
                     <Divider />
-                    <ListItem button>About</ListItem>
+                    <ListItem button selected={this.props.navValue === 1} component={Link} to="/stats">Stats</ListItem>
+                    <Divider />
+                    <ListItem button selected={this.props.navValue === 2} component={Link} to="/about">About</ListItem>
                     <Divider />
                 </List>
             </div>
@@ -97,8 +120,15 @@ class ResponsiveDrawer extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Responsive drawer
+                            Habit Creator
                         </Typography>
+                        <Hidden smDown>
+                            <Tabs value={this.props.navValue} className={classes.tabs}>
+                                <Tab label="Home" className={classes.tab} component={Link} to="/" />
+                                <Tab label="Stats" className={classes.tab} component={Link} to="/stats" />
+                                <Tab label="About" className={classes.tab} component={Link} to="/about" />
+                            </Tabs>
+                        </Hidden>
                         <Button color="inherit" className={classes.logout}>Logout</Button>
                     </Toolbar>
                 </AppBar>
@@ -118,21 +148,6 @@ class ResponsiveDrawer extends React.Component {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Hidden smDown implementation="css">
-                    <Drawer
-                        variant="permanent"
-                        open
-                        classes={{
-                            paper: classes.drawerPaper,
-                        }}
-                    >
-                        {drawer}
-                    </Drawer>
-                </Hidden>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-                </main>
             </div>
         );
     }
