@@ -10,9 +10,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import { ListItem, Button } from '@material-ui/core';
+import { ListItem, Button, Tooltip } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+
+import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew';
 
 import { Link } from 'react-router-dom';
 
@@ -129,7 +131,11 @@ class ResponsiveDrawer extends React.Component {
                                 <Tab label="About" className={classes.tab} component={Link} to="/about" />
                             </Tabs>
                         </Hidden>
-                        <Button color="inherit" className={classes.logout}>Logout</Button>
+                        <Tooltip title="Logout">
+                            <IconButton color="inherit" className={classes.logout}>
+                                <PowerSettingsNew />
+                            </IconButton>
+                        </Tooltip>
                     </Toolbar>
                 </AppBar>
                 <Hidden mdUp>
