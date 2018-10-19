@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from '../components/Navbar';
-import { Typography, withStyles, Grid, Paper, TextField, List, ListItem } from '@material-ui/core';
+import { Typography, withStyles, Grid, Paper, TextField, List, ListItem, Card, CardHeader, CardContent, Button } from '@material-ui/core';
 
 const styles = theme => ({
     mainContainer: {
@@ -11,9 +11,17 @@ const styles = theme => ({
         marginLeft: 8,
         marginRight: 8
     },
-    item: {
-        boxShadow: '0 4px 8px rgba(0,0,0,.15)'
-    }
+    cardContent: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    card: {
+        'card:not(:last-child)': {
+            marginBottom: 8
+        },
+        marginBottom: 8
+    },
 });
 
 class Home extends Component {
@@ -30,9 +38,30 @@ class Home extends Component {
                     <Grid container spacing={8}>
                         <Grid item md={6} xs={12}>
                             <Typography variant="h6" align="center">Example text one</Typography>
-                            <List>
-                                <ListItem className={classes.item}><Typography variant="body1">Do some work</Typography></ListItem>
-                            </List>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.cardContent}>
+                                    <Typography variant="body1">This is an example text of a card</Typography>
+                                    <Button variant="contained" color="primary">Finish</Button>
+                                </CardContent>
+                            </Card>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.cardContent}>
+                                    <Typography variant="body1">This is an example text of a card</Typography>
+                                    <Button variant="contained" color="primary">Finish</Button>
+                                </CardContent>
+                            </Card>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.cardContent}>
+                                    <Typography variant="body1">This is an example text of a card</Typography>
+                                    <Button variant="contained" color="primary">Finish</Button>
+                                </CardContent>
+                            </Card>
+                            <Card className={classes.card}>
+                                <CardContent className={classes.cardContent}>
+                                    <Typography variant="body1">This is an example text of a card</Typography>
+                                    <Button variant="contained" color="primary">Finish</Button>
+                                </CardContent>
+                            </Card>
                         </Grid>
                         <Grid item md={6} xs={12}>
                             <Typography variant="h6" align="center">Example text two</Typography>
